@@ -1,0 +1,5 @@
+Flask
+flask_mysqldb
+python-dotenv
+mysql-connector-python
+mysqlclient

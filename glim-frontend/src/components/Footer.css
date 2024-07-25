@@ -1,0 +1,13 @@
+footer {
+    background-color: #f8f9fa; /* Cor de fundo do footer */
+}
+  
+footer p {
+    margin: 0; /* Remove a margem padrão dos parágrafos */
+    padding: 0; /* Remove o preenchimento padrão dos parágrafos */
+}
+  
+footer h5 {
+    margin-bottom: 1rem; /* Espaçamento abaixo do título de contato */
+}
+  
