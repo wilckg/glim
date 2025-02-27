@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Historia from './pages/Historia';
 import Time from './pages/Time';
 import FAQ from './pages/FAQ';
+import Buscador from './pages/Buscador'
 
 function RoutesApp(){
   return (
@@ -18,6 +19,7 @@ function RoutesApp(){
         <Route path="/historia" element={<Historia />} />
         <Route path="/time" element={<Time />} />
         <Route path="/faq" element={<FAQ />} />
+        <Route path="/buscador" element={<Buscador />} />
       </Routes>
       <Footer />
     </BrowserRouter>

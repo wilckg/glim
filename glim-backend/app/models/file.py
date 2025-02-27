@@ -74,7 +74,7 @@ class File:
         print(res['text'])
         return False
 
-    def create_patterns(pln, novos_padroes):
+    def create_patterns(self, pln, novos_padroes):
         matcher = Matcher(pln.vocab)
         # Transforma as novas frases em padrões
         for padrao in novos_padroes:
@@ -101,8 +101,11 @@ class File:
                     span = Span(doc, start, end, label="MEMORY_REFERENCE")
                     spans.append(span)
                 
-                doc.ents = list(doc) + spans
+                # Atribui as spans diretamente a doc.ents
+                doc.ents = spans
+                
                 highlighted_text = displacy.render(doc, style="ent", jupyter=False)
+                highlighted_text = highlighted_text.replace('\n', ' ')
                 resultado.append({
                     "paragrafo": paragrafo,
                     "highlighted_text": highlighted_text
@@ -110,12 +113,16 @@ class File:
 
         return resultado
 
-    def upload_file(self, file_path):
+    def upload_file(self, file_path, patterns):
         print("Escolha um arquivo em PDF para realizar a busca pelo tipo de memória desejado")
-
-        novos_padroes = []
-
+         # Implementação do método
+        print(f"Processando arquivo: {file_path}")
+        print(f"Padrões: {patterns}")
+        
+        # Lógica para processar o arquivo
+    
         # Verifique se o arquivo existe
+        print(file_path)
         if not os.path.exists(file_path):
             print("Arquivo não encontrado.")
             return
@@ -128,9 +135,31 @@ class File:
             print("Texto extraído com sucesso:")
             print(texto[:500])  # Mostra os primeiros 500 caracteres do texto
             
-            matcher = self.create_patterns(pln, novos_padroes)
+            matcher = self.create_patterns(pln, patterns)
             
             print("As entidades foram destacadas e salvas no arquivo entities.html")
             return self.process_paragraph(texto, pln, matcher)
+        except Exception as e:
+            print(f"Erro ao extrair texto: {e}")
+
+    def upload_text(self, text, patterns):
+        print("Recebe o texto transcrito.")
+        
+        # Verifique se o texto existe
+        if text == "":
+            print("Texto não encontrado.")
+            return
+            
+        # Extrair texto do arquivo PDF
+        try:
+            pln = spacy.load('pt_core_news_sm')
+            
+            print("Texto extraído com sucesso:")
+            print(text[:500])  # Mostra os primeiros 500 caracteres do texto
+            
+            matcher = self.create_patterns(pln, patterns)
+            
+            print("As entidades foram destacadas e salvas no arquivo entities.html")
+            return self.process_paragraph(text, pln, matcher)
         except Exception as e:
             print(f"Erro ao extrair texto: {e}")
