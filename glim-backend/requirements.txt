@@ -8,3 +8,10 @@ gunicorn==20.1.0
 vosk
 librosa
 moviepy
+pdfminer
+spacy
+pandas
+matplotlib
+wordcloud
+nltk
+translate
