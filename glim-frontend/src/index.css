@@ -3,11 +3,8 @@ html, body {
   margin: 0;
 }
 body {
-  display: flex;
-  flex-direction: column;
-}
-
-body {
+  display: grid;
+  grid-template-rows: 1fr auto;
   margin: 0;
   padding: 0;
 }
