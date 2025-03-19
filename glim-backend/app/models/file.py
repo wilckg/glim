@@ -7,10 +7,10 @@ import os
 import wave
 import json
 import librosa
-import soundfile as sf
+# import soundfile as sf
 import numpy as np
-import moviepy.editor as mp
-from pydub import AudioSegment
+#import moviepy.editor as mp
+#from pydub import AudioSegment
 from pdfminer.high_level import extract_text
 import spacy
 from spacy import displacy
@@ -41,38 +41,38 @@ class File:
         print(current_app.config)
         return False
 
-    def extrair_audio(self, video_path, filename="audio"):
-        video_clip = mp.VideoFileClip(video_path)
-        audio_clip = video_clip.audio
-        # audio_clip.nchannels = 1
-        audio_clip.write_audiofile(f"{current_app.config['UPLOAD_FOLDER_AUDIO']}{filename}.wav")
-        self.convert_audio_mono(f"{current_app.config['UPLOAD_FOLDER_AUDIO']}{filename}.wav", filename)
+    # def extrair_audio(self, video_path, filename="audio"):
+    #     video_clip = mp.VideoFileClip(video_path)
+    #     audio_clip = video_clip.audio
+    #     # audio_clip.nchannels = 1
+    #     audio_clip.write_audiofile(f"{current_app.config['UPLOAD_FOLDER_AUDIO']}{filename}.wav")
+    #     self.convert_audio_mono(f"{current_app.config['UPLOAD_FOLDER_AUDIO']}{filename}.wav", filename)
 
 
-    def convert_audio_mono(audio_path, filename="audio"):
-        sound = AudioSegment.from_wav(audio_path)
-        sound = sound.set_channels(1)
-        output_audio_path = f"{current_app.config['UPLOAD_FOLDER_AUDIO']}{filename}-movo.wav"
-        sound.export(output_audio_path, format="wav")
+    # def convert_audio_mono(audio_path, filename="audio"):
+    #     sound = AudioSegment.from_wav(audio_path)
+    #     sound = sound.set_channels(1)
+    #     output_audio_path = f"{current_app.config['UPLOAD_FOLDER_AUDIO']}{filename}-movo.wav"
+    #     sound.export(output_audio_path, format="wav")
 
-    def transcript_file(audio_path, filaname):
-        wf = wave.open(audio_path, 'rb')
-        if wf.getnchannels() != 1:
-            print('o arquivo de audio deve estar no formato WAV mono PCM')
-            exit(1)
+    # def transcript_file(audio_path, filaname):
+    #     wf = wave.open(audio_path, 'rb')
+    #     if wf.getnchannels() != 1:
+    #         print('o arquivo de audio deve estar no formato WAV mono PCM')
+    #         exit(1)
             
-        model = Model('model')
-        rec = KaldiRecognizer(model, wf.getframerate())
-        while True:
-            data = wf.readframes(4000)
-            if len(data) == 0:
-                break
-            if rec.AcceptWaveform(data):
-                res = json.loads(rec.Result())
-                print(res['text'])
-        res = json.loads(rec.FinalResult())
-        print(res['text'])
-        return False
+    #     model = Model('model')
+    #     rec = KaldiRecognizer(model, wf.getframerate())
+    #     while True:
+    #         data = wf.readframes(4000)
+    #         if len(data) == 0:
+    #             break
+    #         if rec.AcceptWaveform(data):
+    #             res = json.loads(rec.Result())
+    #             print(res['text'])
+    #     res = json.loads(rec.FinalResult())
+    #     print(res['text'])
+    #     return False
 
     def create_patterns(self, pln, novos_padroes):
         matcher = Matcher(pln.vocab)
