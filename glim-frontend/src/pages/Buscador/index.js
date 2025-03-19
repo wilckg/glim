@@ -10,6 +10,7 @@ function Buscador() {
     const [inputValue, setInputValue] = useState('');
     const [fileType, setFileType] = useState('');
     const [file, setFile] = useState(null);
+    const [result, setResult] = useState();
 
     const handleAddTag = (event) => {
         if ((event.key === 'Enter' || event.type === 'click') && inputValue) {
@@ -36,24 +37,25 @@ function Buscador() {
         formData.append('fileType', fileType)
         formData.append('tags', tags)
 
-        try{
+        try {
             await api.post('/memoria', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             })
-            .then((response)=>{
-                console.log(response.data)
-            })
+                .then((response) => {
+                    setResult(response.data.data)
+                    console.log(response.data)
+                })
 
-        } catch (error){
+        } catch (error) {
             console.error('Error:', error)
         }
 
     }
 
     return (
-        <Container>
+        <Container className="container-buscador">
             <section>
                 <h3>Buscador de memórias</h3>
                 <Row>
@@ -62,7 +64,7 @@ function Buscador() {
                             <Form.Group controlId="formFile" className="mb-3">
                                 <Form.Control type="file" onChange={(e) => setFile(e.target.files[0])} disabled={!fileType} accept={fileType} />
                             </Form.Group>
-                        </article>  
+                        </article>
                     </Col>
                     <Col md={2}>
                         <article>
@@ -99,6 +101,17 @@ function Buscador() {
                             </Button>
                         </article>
                     </Col>
+                </Row>
+            </section>
+            <section>
+                <Row>
+                    {result && result.map((element, index) => {
+                        return (
+                            <Col md={12} key={index}>
+                                <div dangerouslySetInnerHTML={{ __html: element.highlighted_text }} />
+                            </Col>
+                        );
+                    })}
                 </Row>
             </section>
         </Container>

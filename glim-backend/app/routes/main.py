@@ -102,8 +102,9 @@ def memoria():
             print(file_path)
                        
             # Chama o método upload_file a partir da instância
-            texto = file_processor.upload_file(file_path, patterns)
-            return f'Arquivo {filename} carregado com sucesso. Caminho: {file_path}. Transcrição: {texto}'
+            result = file_processor.upload_file(file_path, patterns)
+            # return f'Arquivo {filename} carregado com sucesso. Caminho: {file_path}. Transcrição: {result}'
+            return jsonify({"message": f'Arquivo {filename} carregado com sucesso. Caminho: {file_path}', "data": result }), 200
         
         else:
             file_path = os.path.join(current_app.config['UPLOAD_FOLDER_VIDEO'], filename)
@@ -115,4 +116,4 @@ def memoria():
             texto = file_processor.transcript_file(audio_path)
             return f'Arquivo {filename} carregado com sucesso. Caminho: {file_path}. Transcrição: {texto}' 
     
-    return "File not uploaded."
+    return jsonify({"message": "File not uploaded."}), 500

@@ -1,5 +1,36 @@
+.container-buscador{
+    height: 70vh;
+}
+
 .tag-container .badge-custom {
     cursor: pointer;
     border-radius: 4px !important;
     margin-right: 5px;
+}
+
+.entities {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px 0;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.entity {
+    display: inline-block;
+    background: #c1f1c0 !important;
+    padding: 0.5em 0.75em;
+    margin: 0.25em 0;
+    border-radius: 0.5em;
+    border: 1px solid #80deea;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.entity-label {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #00796b;
+    margin-left: 0.5em;
 }
