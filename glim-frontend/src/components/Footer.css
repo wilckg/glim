@@ -1,6 +1,7 @@
 footer {
     background-color: rgb(200 211 221) !important;
-    position: relative;
+    position: absolute;
+    width: 100%;
     bottom: 0;
 }
   

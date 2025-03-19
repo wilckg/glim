@@ -7,7 +7,7 @@ import './Footer.css';
 
 function Footer() {
   return (
-    <footer className="bg-light py-4">
+    <footer className="py-4">
       <Container>
         <Row>
           <Col md={4} className="text-center">
