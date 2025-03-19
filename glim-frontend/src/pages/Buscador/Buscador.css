@@ -1,5 +1,6 @@
 .container-buscador{
-    height: 70vh;
+    flex: 1;
+    padding: 20px;
 }
 
 .tag-container .badge-custom {
