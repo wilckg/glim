@@ -1,6 +1,6 @@
 footer {
-    background-color: #f8f9fa; /* Cor de fundo do footer */
-    position: fixed;
+    background-color: rgb(200 211 221) !important;
+    position: relative;
     bottom: 0;
 }
   
